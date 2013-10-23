@@ -1,0 +1,61 @@
+# fossensics-br2 - Collect FOSS information from a Buildroot build
+# Copyright (C) 2013 Eric Le Bihan
+# This file is distributed under the same license as the fossensics-br2 package.
+# Eric Le Bihan <eric.le.bihan.dev@free.fr, 2013
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fossensics-br2 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-22 10:47+0200\n"
+"PO-Revision-Date: 2013-10-22 11:13+0200\n"
+"Last-Translator: Eric Le Bihan <eric.le.bihan.dev@free.fr>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: scripts/fossensics-br2:36
+msgid "build directory"
+msgstr "répertoire de construction"
+
+#: scripts/fossensics-br2:39
+msgid "set output directory"
+msgstr "définit le répertoire de sortie"
+
+#: scripts/fossensics-br2:44
+msgid "display statistics when finished"
+msgstr "affiche des statistiques à la fin"
+
+#: fossensics/buildroot2.py:45
+msgid "Can not find 'strip' program"
+msgstr "Impossible de trouver le programme 'strip'"
+
+#: fossensics/buildroot2.py:168
+msgid "Global Statistics"
+msgstr "Statistiques Globaux"
+
+#: fossensics/buildroot2.py:170
+msgid "Number of packages: {0}"
+msgstr "Nombre de paquets : {0}"
+
+#: fossensics/buildroot2.py:171
+msgid "Number of programs: {0}"
+msgstr "Nombre de programmes : {0}"
+
+#: fossensics/buildroot2.py:172
+msgid "Number of orphans: {0}"
+msgstr "Nombre d'orphelins : {0}"
+
+#: fossensics/buildroot2.py:173
+msgid "Number of undocumented: {0}\n"
+msgstr "Nombre de sans-papiers : {0}\n"
+
+#: fossensics/buildroot2.py:175
+msgid "Packages Statistics"
+msgstr "Statistiques des Paquets"
+
+#: fossensics/buildroot2.py:177
+msgid "Here is the number of programs provided by each package:\n"
+msgstr "Voici le nombre de programmes fournis par chaque paquet :\n"
