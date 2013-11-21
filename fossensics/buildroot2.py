@@ -65,6 +65,7 @@ class Inspector(object):
         origs_fn, orphs_fn = self._collect_origins(progs_fn, destination)
         pkgs_fn = self._refine_origins(origs_fn, destination)
         lics_fn, undocs_fn = self._collect_licenses(pkgs_fn, destination)
+        lics_fn = self._refine_licenses(lics_fn, destination)
         self._compute_stats(pkgs_fn, orphs_fn, undocs_fn)
 
     def _collect_progs(self, destination):
@@ -114,7 +115,7 @@ class Inspector(object):
         return outfn
 
     def _collect_licenses(self, infn, destination):
-        outfn = os.path.join(destination, 'licenses.txt')
+        outfn = os.path.join(destination, 'licenses-full.txt')
         errfn = os.path.join(destination, 'undocumented.txt')
         args = ('grissom-legal-info', 'query', '-')
         packages = []
@@ -133,6 +134,35 @@ class Inspector(object):
                                     stdout=outf,
                                     stderr=errf)
         return outfn, errfn
+
+    def _refine_licenses(self, infn, destination):
+        exceptions = [
+            'No_license_found', 'Same-license-as',
+            'FSF', 'Trademark-ref', 'GPL-exception'
+        ]
+        licenses = {}
+        expr = re.compile(r'([\w\-\+\.]+)\s\((\d+)\)')
+        outfn = os.path.join(destination, 'licenses.txt')
+        with open(infn, 'r') as inf:
+            for line in inf:
+                license = None
+                count = 0
+                package, stats = line.strip().split(':')
+                package = package.replace('%', '')
+                for s in stats.split(','):
+                    m = expr.match(s.strip())
+                    if m:
+                        l, c = m.groups()
+                        c = int(c)
+                        if not l in exceptions:
+                            if c > count:
+                                license = l
+                                count = c
+                licenses[package] = license
+        with open(outfn, 'w') as outf:
+            for p in sorted(licenses):
+                outf.write(("{}: {}\n".format(p, licenses[p])))
+        return outfn
 
     def _compute_stats(self, packages_fn, orphans_fn, undocs_fn):
         with open(orphans_fn, 'r') as f:
